@@ -1,0 +1,28 @@
+# Secrets
+.env
+*.env
+!.env.example
+
+# Patient data (LGPD) — never commit
+system/data/
+experiments/results/
+imagens/
+images/
+dataset/
+*.db
+*.db-*
+*.xlsx
+*.csv
+*.jsonl
+*.jpg
+*.jpeg
+*.heic
+*.log
+
+# Python / OS
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+.DS_Store
+.claude/

@@ -1,0 +1,310 @@
+{
+ "_note": "Aggregate counts only. Computed from the private result files (experiments/results/*.jsonl, gt_cache.json) with analysis/finding_metrics.py. No patient-level data.",
+ "dataset": {
+  "photos_with_reference_report": 228,
+  "evaluated_in_ab": 225,
+  "by_source": {
+   "pilot_spreadsheet_v1": 54,
+   "batch_jun2026": 146,
+   "production_bot": 25
+  },
+  "reference": "free-text report written by a physician, parsed into the same structured schema as the model output"
+ },
+ "per_finding": {
+  "preprocess_on": {
+   "atrial_fibrillation_flutter": {
+    "tp": 4,
+    "fn": 6,
+    "fp": 5,
+    "tn": 210
+   },
+   "non_sinus_rhythm": {
+    "tp": 6,
+    "fn": 9,
+    "fp": 7,
+    "tn": 203
+   },
+   "st_elevation": {
+    "tp": 2,
+    "fn": 12,
+    "fp": 3,
+    "tn": 208
+   },
+   "st_depression": {
+    "tp": 9,
+    "fn": 2,
+    "fp": 53,
+    "tn": 161
+   },
+   "lbbb": {
+    "tp": 1,
+    "fn": 10,
+    "fp": 0,
+    "tn": 214
+   },
+   "rbbb": {
+    "tp": 3,
+    "fn": 13,
+    "fp": 0,
+    "tn": 209
+   },
+   "av_block_any": {
+    "tp": 1,
+    "fn": 5,
+    "fp": 1,
+    "tn": 218
+   },
+   "fascicular_block": {
+    "tp": 0,
+    "fn": 11,
+    "fp": 0,
+    "tn": 214
+   },
+   "lvh": {
+    "tp": 17,
+    "fn": 10,
+    "fp": 85,
+    "tn": 113
+   },
+   "pacemaker": {
+    "tp": 2,
+    "fn": 0,
+    "fp": 0,
+    "tn": 223
+   },
+   "q_waves_inactive_area": {
+    "tp": 3,
+    "fn": 20,
+    "fp": 10,
+    "tn": 192
+   },
+   "t_wave_changes": {
+    "tp": 24,
+    "fn": 6,
+    "fp": 136,
+    "tn": 59
+   },
+   "any_abnormality": {
+    "tp": 108,
+    "fn": 25,
+    "fp": 63,
+    "tn": 29
+   }
+  },
+  "preprocess_off": {
+   "atrial_fibrillation_flutter": {
+    "tp": 4,
+    "fn": 6,
+    "fp": 5,
+    "tn": 209
+   },
+   "non_sinus_rhythm": {
+    "tp": 6,
+    "fn": 9,
+    "fp": 7,
+    "tn": 202
+   },
+   "st_elevation": {
+    "tp": 1,
+    "fn": 13,
+    "fp": 3,
+    "tn": 207
+   },
+   "st_depression": {
+    "tp": 4,
+    "fn": 7,
+    "fp": 48,
+    "tn": 165
+   },
+   "lbbb": {
+    "tp": 1,
+    "fn": 9,
+    "fp": 0,
+    "tn": 214
+   },
+   "rbbb": {
+    "tp": 2,
+    "fn": 14,
+    "fp": 0,
+    "tn": 208
+   },
+   "av_block_any": {
+    "tp": 1,
+    "fn": 5,
+    "fp": 1,
+    "tn": 217
+   },
+   "fascicular_block": {
+    "tp": 0,
+    "fn": 10,
+    "fp": 0,
+    "tn": 214
+   },
+   "lvh": {
+    "tp": 14,
+    "fn": 12,
+    "fp": 80,
+    "tn": 118
+   },
+   "pacemaker": {
+    "tp": 2,
+    "fn": 0,
+    "fp": 0,
+    "tn": 222
+   },
+   "q_waves_inactive_area": {
+    "tp": 3,
+    "fn": 20,
+    "fp": 12,
+    "tn": 189
+   },
+   "t_wave_changes": {
+    "tp": 21,
+    "fn": 9,
+    "fp": 130,
+    "tn": 64
+   },
+   "any_abnormality": {
+    "tp": 103,
+    "fn": 29,
+    "fp": 62,
+    "tn": 30
+   }
+  }
+ },
+ "preprocess_ab": {
+  "paired_cases": 224,
+  "case_score": "agree - miss - 2*contradiction",
+  "cases_better_on": 14,
+  "cases_worse_on": 4,
+  "cases_equal": 206,
+  "sign_test_p_two_sided": 0.031,
+  "total_score_off": -7,
+  "total_score_on": 27,
+  "total_score_delta_bootstrap_95ci": [
+   11,
+   61
+  ],
+  "finding_recall_off": 0.54,
+  "finding_recall_on": 0.571,
+  "finding_recall_delta_bootstrap_95ci": [
+   0.01,
+   0.054
+  ],
+  "counts_off": {
+   "agree": 289,
+   "miss": 246,
+   "contradiction": 25,
+   "extra": 661
+  },
+  "counts_on": {
+   "agree": 301,
+   "miss": 226,
+   "contradiction": 24,
+   "extra": 675
+  },
+  "median_latency_s": 8.0
+ },
+ "model_pilot": {
+  "cases": 10,
+  "selection": "5 hardest from the A/B + 5 random (seed 42)",
+  "setup": "text few-shot of 3 nearest reports (embedding of the complaint) + extended thinking",
+  "finding_recall": {
+   "baseline_same_cases": 0.19,
+   "sonnet": 0.23,
+   "opus": 0.2
+  },
+  "tokens_per_case": {
+   "sonnet": {
+    "in": 4892,
+    "out": 1517
+   },
+   "opus": {
+    "in": 4828,
+    "out": 1182
+   }
+  },
+  "median_latency_s": 17
+ },
+ "production": {
+  "window": "2026-05-21 to 2026-05-27",
+  "cases_received": 25,
+  "cases_with_physician_decision": 21,
+  "approved_unchanged": 1,
+  "corrected": 20,
+  "report_text_similarity_median": 0.39,
+  "reports_unchanged": 4,
+  "plan_text_similarity_median": 0.07,
+  "plans_unchanged": 1,
+  "plans_similarity_below_0_3": 16,
+  "report_length_chars_median": {
+   "model": 303,
+   "physician_final": 174
+  },
+  "report_similarity_per_case": [
+   1.0,
+   0.33,
+   1.0,
+   0.29,
+   0.85,
+   0.31,
+   0.39,
+   1.0,
+   0.62,
+   0.28,
+   0.42,
+   0.39,
+   0.56,
+   0.95,
+   0.93,
+   0.23,
+   0.27,
+   0.3,
+   0.29,
+   0.24,
+   1.0
+  ],
+  "plan_similarity_per_case": [
+   1.0,
+   0.05,
+   0.69,
+   0.31,
+   0.03,
+   0.05,
+   0.22,
+   0.16,
+   0.24,
+   0.04,
+   0.34,
+   0.02,
+   0.86,
+   0.05,
+   0.06,
+   0.27,
+   0.05,
+   0.07,
+   0.02,
+   0.06,
+   0.23
+  ],
+  "similarity_metric": "difflib.SequenceMatcher ratio between the text the model sent and the text the physician signed (1.0 = unchanged)"
+ },
+ "v1": {
+  "cases": 46,
+  "triage_normal_vs_abnormal": {
+   "accuracy": 0.7,
+   "sensitivity": 0.81,
+   "specificity": 0.43,
+   "ppv": 0.76,
+   "npv": 0.5
+  },
+  "text_similarity_full_pipeline": {
+   "report": 0.43,
+   "plan": 0.31
+  },
+  "text_similarity_zero_shot": {
+   "report": 0.44,
+   "plan": 0.43
+  }
+ }
+}
