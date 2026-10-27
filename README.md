@@ -21,6 +21,26 @@
 | **In production** | The cardiologist corrected 20 of 21 drafts. The management plan was almost always rewritten (median text similarity 0.07) |
 | **Stack** | Python, Pydantic, Anthropic API (vision + tool use), OpenCV, SQLite, Telegram Bot API, pytest (50 tests) |
 
+## Decisions I made
+
+The code was written with AI coding agents under my direction. These were my calls:
+
+- **The cardiologist always signs.** The model only drafts. Nothing reaches the GP without a physician's approval or
+  correction.
+- **Meet the doctors where they already were.** Telegram, the channel in which GPs were already sending ECG photos to
+  specialists.
+- **Choose the models for each step.** Which Claude model reads the image, which writes the report and which writes the
+  plan, and the Sonnet vs. Opus test.
+- **Remove retrieval.** Drop the textbook and guideline RAG once a zero-shot model matched or beat it (v1).
+- **A schema as the source of truth, rules in Python.** Structured findings in a forced JSON schema; patterns, vital
+  signs and risk in deterministic, tested code.
+- **Learn the physician's voice from her corrections.** Use approved and corrected cases as few-shot examples for the
+  report and the plan.
+- **Evaluate per finding.** Compare model and physician field by field on the same schema, instead of by text
+  similarity.
+- **Attack image quality first, and measure it.** Preprocess the photo (deskew, crop, contrast) and test it in a
+  paired A/B before keeping it.
+
 ---
 
 ## 1. The design: deterministic where possible, LLM only where needed
@@ -164,6 +184,8 @@ repository or its history. The data stays on the machine where it was collected.
 not a medical device, and it is not intended for clinical use without a physician's review.**
 
 *Notes:* code comments and identifiers are in Portuguese (`laudo` = report, `conduta` = management plan,
-`achados` = findings, `médica` = physician). The code was written with AI coding agents (Claude Code) under my direction: I chose the models and the
-architecture, defined the workflow and the evaluation design, and made the decisions at each version. Every number
+`achados` = findings, `médica` = physician). The code was written with AI coding agents (Claude Code) under my direction (see "Decisions I made"). Every number
 above comes from scripts in this repo run on the private data.
+The project was developed over several months in a private repository that also held patient data. It was published
+here as a single fresh commit so that no patient data could ever enter the public history. `docs/v1.md` and the
+version notes above record the order of the work.
